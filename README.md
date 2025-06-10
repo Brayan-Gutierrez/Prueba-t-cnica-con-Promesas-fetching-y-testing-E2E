@@ -3,15 +3,12 @@ Crear una aplicación React que al cargar muestre un hecho aleatorio sobre gatos
 
 APIs:
 
-    Facts Random: https://catfact.ninja/fact
-
-    Imagen random: https://cataas.com/cat/says/hello
-
-    Recupera un hecho aleatorio de gatos de la primera API
-
-    Recuperar la primera palabra del hecho
-
-    Muestra una imagen de un gato con la primera palabra.
+    - Facts Random: https://catfact.ninja/fact
+    - Imagen random: https://cataas.com/cat/says/hello
+    
+    - Recupera un hecho aleatorio de gatos de la primera API
+    - Recuperar la primera palabra del hecho
+    - Muestra una imagen de un gato con la primera palabra.
 
 
 Pasos para configurar el proyecto
@@ -33,3 +30,7 @@ Pasos para configurar el proyecto
 8. Crear el punto de entrada, modificaremos el main.js
 
 9. Cambiar el nombre main.js por main.jsx y en index.html en el import del main
+
+10. Intalar el linter npm install standard -D
+
+11. Configurar el linter en el package.json
