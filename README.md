@@ -30,3 +30,6 @@ Pasos para configurar el proyecto
 
 7. Crear el archivo de configuración vite.config.js
 
+8. Crear el punto de entrada, modificaremos el main.js
+
+9. Cambiar el nombre main.js por main.jsx y en index.html en el import del main
