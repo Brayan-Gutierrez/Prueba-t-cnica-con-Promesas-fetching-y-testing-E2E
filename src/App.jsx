@@ -1,44 +1,21 @@
 import { useEffect, useState } from "react"
 import './App.css'
-
-const CAT_ENDPOINT_RANDOM_FACT =`https://catfact.ninja/fact`
-// const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${firstWord}?size&color=red&json=true`
+import { getImgFact, getRandomFact } from "./services/facts"
 
 export function App (){
   const [fact, setFact] = useState()
   const [imageUrl, setImageUrl] = useState()
-  const [factError, setFactError] = useState()
 
   //para recuperar la cita al cargar página
   useEffect(()=>{
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-    .then(res =>{
-      if (!res.ok) throw new Error("Error fetching fact")    
-      return res.json()
-    })
-    .then(data => {
-      const {fact} = data
-      setFact(fact)
-    })
-    .catch((err) => {
-      //si hay error con la respuesta
-      //hay error con la petición
-    })
+    getRandomFact().then(setFact)
   },[])
 
   //para recuperar la imagen cada vez que tenemos una cita nueva
   useEffect(()=>{
     if (!fact) return
-
     const threeWords =fact.split(" ", 3).join(" ")
-    console.log(threeWords)
-
-    fetch(`https://cataas.com/cat/says/${threeWords}?size&color=red&json=true`)
-    .then(res => res.json())
-    .then(response =>{
-      const {url} = response
-      setImageUrl(url)
-    })  
+    getImgFact(threeWords).then(setImageUrl)  
   },[fact])
 
   //Toda la logica en un useEffect
@@ -73,9 +50,15 @@ export function App (){
   //   getRandomFact()
   // })
 
+  const handleClick = async () => {
+    const newFact = await getRandomFact()
+    setFact(newFact)
+  }
+
   return (
     <main >
       <h1>App de gatitos</h1>
+      <button onClick={handleClick}>Get new fact</button>
       <section>
         {fact &&<p>{fact}</p>}
         {imageUrl && <img src={imageUrl} alt={`Image extracted using the first three words for ${fact}`}/>}
